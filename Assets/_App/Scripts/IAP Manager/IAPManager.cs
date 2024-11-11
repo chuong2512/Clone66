@@ -1,9 +1,7 @@
-using UnityEngine.Purchasing.Security;
 using System;
 using System.Collections;
 using RObo;
 using UnityEngine;
-using UnityEngine.Purchasing;
 
 public class Key
 {
@@ -22,10 +20,10 @@ public class Key
     public const string PACK5_REGISTER = "register_game66_pack5";
 }
 
-public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
+public class IAPManager : PersistentSingleton<IAPManager> /*, IStoreListener*/
 {
-    private static IStoreController storeController;
-    private static IExtensionProvider extensionProvider;
+    /*private static IStoreController storeController;
+    private static IExtensionProvider extensionProvider;*/
     public static Action OnPurchaseSuccess;
 
     private bool _isBuyFromShop;
@@ -37,20 +35,20 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
 
     private void InitIAP()
     {
-        if (storeController == null)
+        /*if (storeController == null)
         {
             InitProduct();
-        }
+        }*/
     }
 
     private void InitProduct()
     {
-        if (IsInitialized())
+        /*if (IsInitialized())
         {
             return;
-        }
+        }*/
 
-        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+        /*var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
         builder.AddProduct(Key.PACK1, ProductType.Consumable);
         builder.AddProduct(Key.PACK2, ProductType.Consumable);
@@ -63,7 +61,7 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
         builder.AddProduct(Key.PACK3_REGISTER, ProductType.Subscription);
         builder.AddProduct(Key.PACK4_REGISTER, ProductType.Subscription);
         builder.AddProduct(Key.PACK5_REGISTER, ProductType.Subscription);
-        UnityPurchasing.Initialize(this, builder);
+        UnityPurchasing.Initialize(this, builder);*/
     }
 
     public void BuyProductID(string productId)
@@ -71,9 +69,9 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
         _isBuyFromShop = true;
 
 #if UNITY_EDITOR
-        OnPurchaseComplete(productId);
+        /*OnPurchaseComplete(productId);*/
 #else
-            // If Purchasing has been initialized ...
+            /*// If Purchasing has been initialized ...
             if (IsInitialized())
             {
                 Product product = storeController.products.WithID(productId);
@@ -94,11 +92,11 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
                 // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
                 // retrying initialization.
                 Debug.Log("BuyProductID FAIL. Not initialized.");
-            }
+            }*/
 #endif
     }
 
-    private bool IsInitialized()
+    /*private bool IsInitialized()
     {
         // Only say we are initialized if both the Purchasing references are set.
         return storeController != null && extensionProvider != null;
@@ -126,7 +124,7 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
             return;
         }
 
-        // If we are running on an Apple device ... 
+        // If we are running on an Apple device ...
         if (Application.platform == RuntimePlatform.IPhonePlayer ||
             Application.platform == RuntimePlatform.OSXPlayer)
         {
@@ -215,9 +213,9 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
             OnPurchaseComplete(args.purchasedProduct.definition.id);
         }
 
-        // Return a flag indicating whether this product has completely been received, or if the application needs 
-        // to be reminded of this purchase at next app launch. Use PurchaseProcessingResult.Pending when still 
-        // saving purchased products to the cloud, and when that save is delayed. 
+        // Return a flag indicating whether this product has completely been received, or if the application needs
+        // to be reminded of this purchase at next app launch. Use PurchaseProcessingResult.Pending when still
+        // saving purchased products to the cloud, and when that save is delayed.
         return PurchaseProcessingResult.Complete;
     }
 
@@ -253,5 +251,5 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
     {
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}",
             product.definition.storeSpecificId, failureReason));
-    }
+    }*/
 }
