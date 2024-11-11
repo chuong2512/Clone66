@@ -12,6 +12,7 @@ namespace ICEBOOO
             {
                 if (condition(element)) return element;
             }
+
             return default(T);
         }
 
@@ -24,6 +25,7 @@ namespace ICEBOOO
                 if (index >= count) break;
                 result[index++] = element;
             }
+
             return result;
         }
 
@@ -62,6 +64,7 @@ namespace ICEBOOO
                     hasValue = true;
                 }
             }
+
             return result;
         }
     }

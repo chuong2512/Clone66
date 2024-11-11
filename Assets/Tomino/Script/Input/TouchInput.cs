@@ -4,6 +4,7 @@ using ICEBOOO;
 public class TouchInput : IPlayerInput
 {
     public float blockSize;
+
     public bool Enabled
     {
         get => enabled;
@@ -30,7 +31,11 @@ public class TouchInput : IPlayerInput
     {
         playerAction = null;
 
-        if (Input.touchCount > 0)
+        if (Input.touchCount <= 0)
+        {
+            cancelCurrentTouch = false;
+        }
+        else
         {
             var touch = Input.GetTouch(0);
 
@@ -62,10 +67,6 @@ public class TouchInput : IPlayerInput
                 }
             }
         }
-        else
-        {
-            cancelCurrentTouch = false;
-        }
     }
 
     public PlayerAction? GetPlayerAction()
@@ -93,6 +94,7 @@ public class TouchInput : IPlayerInput
             HandleHorizontalMove(touch, offset.x);
             playerAction = ActionForHorizontalMoveOffset(offset.x);
         }
+
         if (offset.y <= -blockSize)
         {
             HandleVerticalMove(touch);

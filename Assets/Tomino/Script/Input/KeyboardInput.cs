@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using ICEBOOO;
 using System.Collections.Generic;
+using System.Linq;
 
 public class KeyboardInput : IPlayerInput
 {
@@ -9,11 +10,11 @@ public class KeyboardInput : IPlayerInput
 
     Dictionary<KeyCode, PlayerAction> actionForKey = new Dictionary<KeyCode, PlayerAction>
     {
-        {KeyCode.LeftArrow, PlayerAction.MoveLeft},
-        {KeyCode.RightArrow, PlayerAction.MoveRight},
-        {KeyCode.DownArrow, PlayerAction.MoveDown},
-        {KeyCode.UpArrow, PlayerAction.Rotate},
-        {KeyCode.Space, PlayerAction.Fall},
+        { KeyCode.LeftArrow, PlayerAction.MoveLeft },
+        { KeyCode.RightArrow, PlayerAction.MoveRight },
+        { KeyCode.DownArrow, PlayerAction.MoveDown },
+        { KeyCode.UpArrow, PlayerAction.Rotate },
+        { KeyCode.Space, PlayerAction.Fall },
     };
 
     readonly List<KeyCode> repeatingKeys = new List<KeyCode>()
@@ -26,25 +27,27 @@ public class KeyboardInput : IPlayerInput
     public PlayerAction? GetPlayerAction()
     {
         var actionKeyDown = GetActionKeyDown();
-        if (actionKeyDown != KeyCode.None)
+        if (actionKeyDown == KeyCode.None)
         {
-            StartKeyRepeatIfPossible(actionKeyDown);
-            return actionForKey[actionKeyDown];
+            if (Input.GetKeyUp(pressedKey))
+            {
+                Cancel();
+            }
+            else
+            {
+                return GetActionForRepeatedKey();
+            }
+
+            return null;
         }
 
-        if (Input.GetKeyUp(pressedKey))
-        {
-            Cancel();
-        }
-        else
-        {
-            return GetActionForRepeatedKey();
-        }
-
-        return null;
+        StartKeyRepeatIfPossible(actionKeyDown);
+        return actionForKey[actionKeyDown];
     }
 
-    public void Update() { }
+    public void Update()
+    {
+    }
 
     public void Cancel()
     {
@@ -53,32 +56,20 @@ public class KeyboardInput : IPlayerInput
 
     void StartKeyRepeatIfPossible(KeyCode key)
     {
-        if (repeatingKeys.Contains(key))
-        {
-            pressedKey = key;
-            nextRepeatedKeyTime = Time.time + ConstantGame.Input.KeyRepeatDelay;
-        }
+        if (!repeatingKeys.Contains(key)) return;
+        pressedKey = key;
+        nextRepeatedKeyTime = Time.time + ConstantGame.Input.KeyRepeatDelay;
     }
 
     KeyCode GetActionKeyDown()
     {
-        foreach (var key in actionForKey.Keys)
-        {
-            if (Input.GetKeyDown(key))
-            {
-                return key;
-            }
-        }
-        return KeyCode.None;
+        return actionForKey.Keys.FirstOrDefault(key => Input.GetKeyDown(key));
     }
 
     PlayerAction? GetActionForRepeatedKey()
     {
-        if (pressedKey != KeyCode.None && Time.time >= nextRepeatedKeyTime)
-        {
-            nextRepeatedKeyTime = Time.time + ConstantGame.Input.KeyRepeatInterval;
-            return actionForKey[pressedKey];
-        }
-        return null;
+        if (pressedKey == KeyCode.None || !(Time.time >= nextRepeatedKeyTime)) return null;
+        nextRepeatedKeyTime = Time.time + ConstantGame.Input.KeyRepeatInterval;
+        return actionForKey[pressedKey];
     }
 }

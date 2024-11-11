@@ -1,5 +1,6 @@
 ﻿using ICEBOOO;
 using System.Collections.Generic;
+using System.Linq;
 
 public class UniversalInput : IPlayerInput
 {
@@ -16,14 +17,11 @@ public class UniversalInput : IPlayerInput
 
     public PlayerAction? GetPlayerAction()
     {
-        foreach (var input in inputs)
+        foreach (var action in inputs.Select(input => input.GetPlayerAction()).Where(action => action != null))
         {
-            var action = input.GetPlayerAction();
-            if (action != null)
-            {
-                return action;
-            }
+            return action;
         }
+
         return null;
     }
 }
