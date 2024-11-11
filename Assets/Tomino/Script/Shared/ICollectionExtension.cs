@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Tomino
+namespace ICEBOOO
 {
     public static class ICollectionExtension
     {

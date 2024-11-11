@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Tomino;
+using ICEBOOO;
 
 public class ScoreView : MonoBehaviour
 {

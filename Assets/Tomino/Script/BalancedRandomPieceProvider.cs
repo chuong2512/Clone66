@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Tomino
+namespace ICEBOOO
 {
     public class BalancedRandomPieceProvider : IPieceProvider
     {
@@ -15,10 +15,9 @@ namespace Tomino
 
         private List<int> GetPopulatedPool()
         {
-            if (pool.Count == 0)
-            {
-                PopulatePool();
-            }
+            if (pool.Count != 0) return pool;
+            PopulatePool();
+
             return pool;
         }
 
@@ -28,6 +27,7 @@ namespace Tomino
             {
                 pool.Add(index, numDuplicates);
             }
+
             pool.Shuffle(random);
         }
     }

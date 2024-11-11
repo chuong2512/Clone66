@@ -1,4 +1,4 @@
-namespace Tomino
+namespace ICEBOOO
 {
     /// <summary>
     /// Controls the game logic by handling user input and updating the board state.

@@ -1,4 +1,4 @@
-namespace Tomino
+namespace ICEBOOO
 {
     /// <summary>
     /// A block with specified type that can be placed (and moved) on a board.

@@ -1,12 +1,13 @@
 using System;
 
-namespace Tomino
+namespace ICEBOOO
 {
     public static class AvailablePieces
     {
         public static Piece[] All()
         {
-            return new Piece[] {
+            return new Piece[]
+            {
                 OPiece(),
                 TPiece(),
                 SPiece(),
@@ -19,7 +20,8 @@ namespace Tomino
 
         public static Piece OPiece()
         {
-            var positions = new Position[] {
+            var positions = new Position[]
+            {
                 new Position(0, 0),
                 new Position(1, 0),
                 new Position(1, 1),
@@ -28,9 +30,10 @@ namespace Tomino
             return new Piece(positions, PieceType.O, false);
         }
 
-        public static Piece TPiece()
+        private static Piece TPiece()
         {
-            var positions = new Position[] {
+            var positions = new Position[]
+            {
                 new Position(0, 0),
                 new Position(1, 0),
                 new Position(-1, 0),
@@ -39,9 +42,10 @@ namespace Tomino
             return new Piece(positions, PieceType.T);
         }
 
-        public static Piece SPiece()
+        private static Piece SPiece()
         {
-            var positions = new Position[] {
+            var positions = new Position[]
+            {
                 new Position(0, 0),
                 new Position(1, 0),
                 new Position(0, 1),
@@ -52,7 +56,8 @@ namespace Tomino
 
         public static Piece ZPiece()
         {
-            var positions = new Position[] {
+            var positions = new Position[]
+            {
                 new Position(0, 0),
                 new Position(-1, 0),
                 new Position(0, 1),
@@ -63,7 +68,8 @@ namespace Tomino
 
         public static Piece JPiece()
         {
-            var positions = new Position[] {
+            var positions = new Position[]
+            {
                 new Position(0, 0),
                 new Position(1, 0),
                 new Position(-1, 0),
@@ -72,9 +78,10 @@ namespace Tomino
             return new Piece(positions, PieceType.J);
         }
 
-        public static Piece LPiece()
+        private static Piece LPiece()
         {
-            var positions = new Position[] {
+            var positions = new Position[]
+            {
                 new Position(0, 0),
                 new Position(1, 0),
                 new Position(-1, 0),
@@ -83,9 +90,10 @@ namespace Tomino
             return new Piece(positions, PieceType.L);
         }
 
-        public static Piece IPiece()
+        private static Piece IPiece()
         {
-            var positions = new Position[] {
+            var positions = new Position[]
+            {
                 new Position(0, 0),
                 new Position(1, 0),
                 new Position(-1, 0),

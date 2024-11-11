@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tomino
+namespace ICEBOOO
 {
     /// <summary>
     /// Contains collection of blocks placed on the board and allows for moving them within the

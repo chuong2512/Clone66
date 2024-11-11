@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tomino
+namespace ICEBOOO
 {
     public static class Settings
     {

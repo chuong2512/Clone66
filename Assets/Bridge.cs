@@ -22,20 +22,20 @@ public class Bridge : Singleton<Bridge>
     {
         transform.position = pos;
 
-        lineRen.SetPositions(new[] {Vector3.zero, Vector3.up * y});
+        lineRen.SetPositions(new[] { Vector3.zero, Vector3.up * y });
 
         if (rotate)
         {
             Rotate(y);
         }
     }
-    
+
     public void Rotate(float y)
     {
         transform.DORotate(Vector3.back * 90, 1f).SetEase(Ease.Linear)
             .OnComplete(() => { Movement.Instance.Move(y); });
     }
-    
+
     public void Reset()
     {
         transform.DOKill();
@@ -43,8 +43,4 @@ public class Bridge : Singleton<Bridge>
         transform.rotation = Quaternion.identity;
         SetLine(0, false);
     }
-
-
-
-
 }

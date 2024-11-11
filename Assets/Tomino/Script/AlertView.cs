@@ -36,6 +36,7 @@ public class AlertView : MonoBehaviour
         {
             Destroy(buttonsContainer.GetChild(i).gameObject);
         }
+
         gameObject.SetActive(false);
     }
 }

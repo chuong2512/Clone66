@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace Tomino
+namespace ICEBOOO
 {
     /// <summary>
     /// A piece is a collection of blocks that all move together on the board.
